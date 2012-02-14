@@ -54,6 +54,7 @@ class BucketFillTool;
 class TilesetDock;
 class MapView;
 class CommandButton;
+class ObjectInspectorDock;
 
 /**
  * The main editor window.
@@ -206,6 +207,7 @@ private:
     QSettings mSettings;
     QToolButton *mRandomButton;
     CommandButton *mCommandButton;
+    ObjectInspectorDock *mObjectInspectorDock;
 
     StampBrush *mStampBrush;
     BucketFillTool *mBucketFillTool;

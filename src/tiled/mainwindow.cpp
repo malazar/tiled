@@ -74,6 +74,7 @@
 #include "utils.h"
 #include "zoomable.h"
 #include "commandbutton.h"
+#include "objectinspectordock.h"
 
 #ifdef Q_WS_MAC
 #include "macsupport.h"
@@ -104,6 +105,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     , mActionHandler(new MapDocumentActionHandler(this))
     , mLayerDock(new LayerDock(this))
     , mTilesetDock(new TilesetDock(this))
+    , mObjectInspectorDock(new ObjectInspectorDock(this))
     , mZoomLabel(new QLabel)
     , mStatusInfoLabel(new QLabel)
     , mClipboardManager(new ClipboardManager(this))
@@ -158,6 +160,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags)
     addDockWidget(Qt::RightDockWidgetArea, undoDock);
     tabifyDockWidget(undoDock, mLayerDock);
     addDockWidget(Qt::RightDockWidgetArea, mTilesetDock);
+    addDockWidget(Qt::RightDockWidgetArea, mObjectInspectorDock);
+    tabifyDockWidget(mTilesetDock,mObjectInspectorDock);
 
     statusBar()->addPermanentWidget(mZoomLabel);
 
@@ -1382,6 +1386,7 @@ void MainWindow::mapDocumentChanged(MapDocument *mapDocument)
     mActionHandler->setMapDocument(mMapDocument);
     mLayerDock->setMapDocument(mMapDocument);
     mTilesetDock->setMapDocument(mMapDocument);
+    mObjectInspectorDock->setMapDocument(mMapDocument);
     AutomappingManager::instance()->setMapDocument(mMapDocument);
     QuickStampManager::instance()->setMapDocument(mMapDocument);
 
