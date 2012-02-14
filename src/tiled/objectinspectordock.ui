@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ObjectInspectorDock</class>
+ <widget class="QDockWidget" name="ObjectInspectorDock">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>284</width>
+    <height>307</height>
+   </rect>
+  </property>
+  <property name="floating">
+   <bool>false</bool>
+  </property>
+  <property name="features">
+   <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+  </property>
+  <property name="allowedAreas">
+   <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+  </property>
+  <property name="windowTitle">
+   <string>Object Inspector</string>
+  </property>
+  <widget class="QWidget" name="objectInspector">
+   <property name="minimumSize">
+    <size>
+     <width>284</width>
+     <height>0</height>
+    </size>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QGridLayout" name="objectLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="nameLabel">
+        <property name="text">
+         <string>Name:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="name"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="typeLabel">
+        <property name="text">
+         <string>Type:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="type">
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <layout class="QGridLayout" name="positionLayout">
+        <item row="1" column="1">
+         <widget class="QDoubleSpinBox" name="x">
+          <property name="decimals">
+           <number>3</number>
+          </property>
+          <property name="minimum">
+           <double>-9999.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QDoubleSpinBox" name="y">
+          <property name="decimals">
+           <number>3</number>
+          </property>
+          <property name="minimum">
+           <double>-9999.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="xLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>13</width>
+            <height>27</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>X:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="yLabel">
+          <property name="text">
+           <string>Y:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="positionLabel">
+          <property name="text">
+           <string>&lt;b&gt;Position&lt;/b&gt;</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::AutoText</enum>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="sizeLayout">
+        <item row="0" column="0">
+         <widget class="QLabel" name="sizeLabel">
+          <property name="text">
+           <string>&lt;b&gt;Size&lt;/b&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="widthLabel">
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>27</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Width:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QDoubleSpinBox" name="width">
+          <property name="decimals">
+           <number>3</number>
+          </property>
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="heightLabel">
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>27</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Height</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QDoubleSpinBox" name="heigth">
+          <property name="decimals">
+           <number>3</number>
+          </property>
+          <property name="maximum">
+           <double>9999.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="propertiesLayout">
+      <item>
+       <widget class="QLabel" name="propertiesLabel">
+        <property name="text">
+         <string>&lt;b&gt;Properties&lt;/b&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListView" name="properties"/>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>name</tabstop>
+  <tabstop>type</tabstop>
+  <tabstop>x</tabstop>
+  <tabstop>y</tabstop>
+  <tabstop>width</tabstop>
+  <tabstop>heigth</tabstop>
+  <tabstop>properties</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

@@ -124,7 +124,8 @@ SOURCES += aboutdialog.cpp \
     selectionrectangle.cpp \
     objecttypes.cpp \
     objecttypesmodel.cpp \
-    commandlineparser.cpp
+    commandlineparser.cpp \
+    objectinspectordock.cpp
 
 HEADERS += aboutdialog.h \
     automapper.h \
@@ -216,7 +217,8 @@ HEADERS += aboutdialog.h \
     objecttypes.h \
     objecttypesmodel.h \
     commandlineparser.h \
-    macsupport.h
+    macsupport.h \
+    objectinspectordock.h
 
 macx {
     OBJECTIVE_SOURCES += macsupport.mm
@@ -233,7 +235,8 @@ FORMS += aboutdialog.ui \
     saveasimagedialog.ui \
     offsetmapdialog.ui \
     objectpropertiesdialog.ui \
-    commanddialog.ui
+    commanddialog.ui \
+    objectinspectordock.ui
 RESOURCES += tiled.qrc
 macx {
     TARGET = Tiled
