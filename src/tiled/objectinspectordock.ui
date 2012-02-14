@@ -175,7 +175,7 @@
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QDoubleSpinBox" name="heigth">
+         <widget class="QDoubleSpinBox" name="height">
           <property name="decimals">
            <number>3</number>
           </property>
@@ -222,7 +222,7 @@
   <tabstop>x</tabstop>
   <tabstop>y</tabstop>
   <tabstop>width</tabstop>
-  <tabstop>heigth</tabstop>
+  <tabstop>height</tabstop>
   <tabstop>properties</tabstop>
  </tabstops>
  <resources/>

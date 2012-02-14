@@ -29,6 +29,9 @@ public:
 
 private:
     void setMapObject(MapObject *);
+    void changeMapObject();
+    void resizeMapObject();
+    void moveMapObject();
     void clear();
 
 private:
@@ -43,7 +46,10 @@ private slots:
     void selectedObjectsChanged();
     void on_name_editingFinished();
     void type_editingFinished();
-    void on_type_currentIndexChanged(QString);
+    void on_x_editingFinished();
+    void on_y_editingFinished();
+    void on_width_editingFinished();
+    void on_height_editingFinished();
 };
 
 }//namespace Internal
