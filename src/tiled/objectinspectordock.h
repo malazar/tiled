@@ -5,6 +5,7 @@
 #include "mapobject.h"
 #include "objecttypesmodel.h"
 
+#include <QModelIndex>
 #include <QDockWidget>
 
 namespace Ui {
@@ -32,6 +33,7 @@ private:
     void changeMapObject();
     void resizeMapObject();
     void moveMapObject();
+    void changeProperties();
     void clear();
 
 private:
@@ -50,6 +52,9 @@ private slots:
     void on_y_editingFinished();
     void on_width_editingFinished();
     void on_height_editingFinished();
+    void dataChanged(QModelIndex , QModelIndex );
+    void layerChanged(int);
+    void deleteSelectedProperties();
 };
 
 }//namespace Internal

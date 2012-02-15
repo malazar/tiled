@@ -84,6 +84,9 @@ bool PropertiesModel::setData(const QModelIndex &index, const QVariant &value,
         // Have to request keys and reset because of possible reordering
         mKeys = mProperties.keys();
         reset();
+
+        emit dataChanged(index, index); //notify the ObjectInspectorDock
+
         return true;
     }
     else if (index.column() == 1) { // Edit value
@@ -110,6 +113,8 @@ void PropertiesModel::deleteProperties(const QModelIndexList &indices)
         mKeys = mProperties.keys();
         endRemoveRows();
     }
+
+
 }
 
 QVariant PropertiesModel::headerData(int section, Qt::Orientation orientation,

@@ -6,7 +6,9 @@
 #include "changemapobject.h"
 #include "resizemapobject.h"
 #include "movemapobject.h"
+#include "changeproperties.h"
 #include <QDebug>
+#include <QShortcut>
 
 using namespace Tiled::Internal;
 
@@ -21,9 +23,21 @@ ObjectInspectorDock::ObjectInspectorDock(QWidget *parent) :
     mPropertiesModel = new PropertiesModel(this);
     ui->objectInspector->setEnabled(false);
 
+    //There should be a tooltip or something similar to inform
+    //the user of the delete shortcut
+
+    QShortcut *deleteShortcut = new QShortcut(Qt::Key_Backspace, ui->properties);
+
+
+    connect(deleteShortcut, SIGNAL(activated()),
+            this, SLOT(deleteSelectedProperties()));
+
+
     connect(ui->type->lineEdit(),SIGNAL(editingFinished()),
             this,SLOT(type_editingFinished()));
 
+    connect(mPropertiesModel,SIGNAL(dataChanged(QModelIndex,QModelIndex))
+            ,this,SLOT(dataChanged(QModelIndex,QModelIndex)));
 }
 
 ObjectInspectorDock::~ObjectInspectorDock()
@@ -73,6 +87,7 @@ void ObjectInspectorDock::setMapObject(MapObject * mapObject)
     else
     {
         this->clear();
+        ui->objectInspector->setEnabled(false);
     }
 
 }
@@ -124,6 +139,16 @@ void ObjectInspectorDock::resizeMapObject()
 
 }
 
+void ObjectInspectorDock::changeProperties()
+{
+    QUndoStack *undo = mMapDocument->undoStack();
+    QString kind = tr("Object");
+
+    undo->beginMacro(tr("Change Object Properties"));
+    undo->push(new ChangeProperties(kind,mMapObject,mPropertiesModel->properties()));
+    undo->endMacro();
+}
+
 
 void ObjectInspectorDock::setMapDocument(MapDocument *mapDocument)
 {
@@ -145,6 +170,8 @@ void ObjectInspectorDock::setMapDocument(MapDocument *mapDocument)
                 this,SLOT(objectsChanged(QList<MapObject*>)));
         connect(mMapDocument,SIGNAL(selectedObjectsChanged()),
                 this,SLOT(selectedObjectsChanged()));
+        connect(mMapDocument,SIGNAL(currentLayerIndexChanged(int)),
+                this,SLOT(layerChanged(int)));
     }
 
 }
@@ -228,4 +255,35 @@ void ObjectInspectorDock::on_height_editingFinished()
     {
         resizeMapObject();
     }
+}
+
+void ObjectInspectorDock::dataChanged(QModelIndex tl, QModelIndex br)
+{
+    if (mMapObject->properties() != mPropertiesModel->properties())
+    {
+        changeProperties();
+    }
+}
+
+void ObjectInspectorDock::deleteSelectedProperties()
+{
+    //Borrowed from properties dialog
+    QItemSelectionModel *selection = ui->properties->selectionModel();
+    const QModelIndexList indices = selection->selectedRows();
+    if (!indices.isEmpty())
+    {
+        mPropertiesModel->deleteProperties(indices);
+        selection->select(ui->properties->currentIndex(),
+                          QItemSelectionModel::ClearAndSelect |
+                          QItemSelectionModel::Rows);
+    }
+
+    changeProperties();
+
+}
+
+void ObjectInspectorDock::layerChanged(int index)
+{
+    //Layer is changed, lets get ready to fetch a new object;
+    setMapObject(NULL);
 }
